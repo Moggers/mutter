@@ -78,6 +78,26 @@ impl Transcript {
             })
             .1
     }
+    ///
+    /// Returns the transcript in SRT format.
+    #[must_use] pub fn as_lrc(&self) -> String {
+        self.utterances
+            .iter()
+            .fold((1, String::new()), |(i, transcript), fragment| {
+                (
+                    i + 1,
+                    transcript
+                        + format!(
+                            "[{}][{}]{}",
+                            format_timestamp(fragment.start, true, ","),
+                            format_timestamp(fragment.stop, true, ","),
+                            fragment.text.trim().replace("-->", "->")
+                        )
+                        .as_str(),
+                )
+            })
+            .1
+    }
 }
 
 /// Timestamp is oddly given in number of seconds * 100, or number of milliseconds / 10.
