@@ -88,9 +88,8 @@ impl Transcript {
                     i + 1,
                     transcript
                         + format!(
-                            "[{}][{}]{}",
+                            "[{}]{}",
                             format_timestamp(fragment.start, true, ","),
-                            format_timestamp(fragment.stop, true, ","),
                             fragment.text.trim().replace("-->", "->")
                         )
                         .as_str(),
