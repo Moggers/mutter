@@ -33,7 +33,8 @@ pub struct Utterance {
 
 impl Transcript {
     /// Returns the transcript as a string.
-    #[must_use] pub fn as_text(&self) -> String {
+    #[must_use]
+    pub fn as_text(&self) -> String {
         self.utterances
             .iter()
             .fold(String::new(), |transcript, fragment| {
@@ -42,7 +43,8 @@ impl Transcript {
     }
 
     /// Returns the transcript in VTT format.
-    #[must_use] pub fn as_vtt(&self) -> String {
+    #[must_use]
+    pub fn as_vtt(&self) -> String {
         let vtt = self
             .utterances
             .iter()
@@ -60,7 +62,8 @@ impl Transcript {
     }
 
     /// Returns the transcript in SRT format.
-    #[must_use] pub fn as_srt(&self) -> String {
+    #[must_use]
+    pub fn as_srt(&self) -> String {
         self.utterances
             .iter()
             .fold((1, String::new()), |(i, transcript), fragment| {
@@ -80,7 +83,8 @@ impl Transcript {
     }
     ///
     /// Returns the transcript in SRT format.
-    #[must_use] pub fn as_lrc(&self) -> String {
+    #[must_use]
+    pub fn as_lrc(&self) -> String {
         self.utterances
             .iter()
             .fold((1, String::new()), |(i, transcript), fragment| {
@@ -88,9 +92,9 @@ impl Transcript {
                     i + 1,
                     transcript
                         + format!(
-                            "[{}]{}",
-                            format_timestamp(fragment.start, true, ","),
-                            fragment.text.trim().replace("-->", "->")
+                            "[{}]{}\n",
+                            format_timestamp(fragment.start, true, "."),
+                            fragment.text.trim()
                         )
                         .as_str(),
                 )
