@@ -87,19 +87,14 @@ impl Transcript {
     pub fn as_lrc(&self) -> String {
         self.utterances
             .iter()
-            .fold((1, String::new()), |(i, transcript), fragment| {
-                (
-                    i + 1,
-                    transcript
-                        + format!(
-                            "[{}]{}\n",
-                            format_timestamp(fragment.start, true, "."),
-                            fragment.text.trim()
-                        )
-                        .as_str(),
+            .map(|utter| {
+                format!(
+                    "[{}]{}\n",
+                    format_timestamp(utter.start, true, "."),
+                    utter.text.trim()
                 )
-            })
-            .1
+            }).collect::<Vec<_>>()
+            .join("\n")
     }
 }
 
