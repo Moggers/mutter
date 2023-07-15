@@ -90,7 +90,7 @@ impl Transcript {
             .map(|utter| {
                 format!(
                     "[{}]{}\n",
-                    format_timestamp(utter.start, true, "."),
+                    format_timestamp(utter.start, false, "."),
                     utter.text.trim()
                 )
             }).collect::<Vec<_>>()
@@ -119,7 +119,7 @@ fn format_timestamp(num: i64, always_include_hours: bool, decimal_marker: &str) 
         String::new()
     };
 
-    format!("{hours_marker}{minutes:02}:{seconds:02}{decimal_marker}{milliseconds:03}")
+    format!("{hours_marker}{minutes:02}:{seconds:02}{decimal_marker}{milliseconds:02}")
 }
 
 #[test]
